@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <title>User Profile</title>
+  </head>
+  <body>
+    <div class="container">
+      <h2 class="display-4 mt-4">User Porfile</h2>
+      <button class="btn btn-danger mt-3" id="btnSubmit">Show Data</button>
+      <div id="results">
+          
+    </div>
+
+    </div>
+
+  
+    <script>
+        window.onload=()=>{
+            document.querySelector("#btnSubmit").addEventListener("click",getData);
+        }
+
+        function getData(){
+            fetch("https://jsonplaceholder.typicode.com/users")
+                 .then(res=>res.json())
+                 .then(data=>{
+                     let out='<h2 class="mt-3 mb-2">Data of users</h2>'
+
+                     data.forEach(user=>{
+                         out+=`
+                           <ul class="list-group mb-3">
+                             <li class="list-group-item text-primary">${user.name}</li>
+                             <li class="list-group-item text-secondary">${user.email}</li>
+                             <li class="list-group-item text-info">${user.webite}</li>
+                           </ul>
+                         `
+                     });
+                     document.querySelector("#results").innerHTML=out;
+                 })
+        }
+    </script>
+
+  </body>
+</html>
